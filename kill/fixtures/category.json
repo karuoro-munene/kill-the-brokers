@@ -1,0 +1,44 @@
+[
+  {
+    "model": "kill.category",
+    "pk": 1,
+    "fields": {
+      "name": "Dairy"
+    }
+  },
+  {
+    "model": "kill.category",
+    "pk": 2,
+    "fields": {
+      "name": "Fish"
+    }
+  },
+  {
+    "model": "kill.category",
+    "pk": 3,
+    "fields": {
+      "name": "Vegetables"
+    }
+  },
+  {
+    "model": "kill.category",
+    "pk": 4,
+    "fields": {
+      "name": "Cereals"
+    }
+  },
+  {
+    "model": "kill.category",
+    "pk": 5,
+    "fields": {
+      "name": "Fruits"
+    }
+  },
+  {
+    "model": "kill.category",
+    "pk": 6,
+    "fields": {
+      "name": "Meats"
+    }
+  }
+]

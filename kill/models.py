@@ -34,3 +34,16 @@ def update_profile_signal(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance, email=instance.email)
     instance.profile.save()
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, null=False)
+
+
+class Product(models.Model):
+    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,null=False)
+    images = models.ImageField(upload_to="product_images",null=True)
+    price = models.FloatField(null=True, default=0.0)
+    quantity = models.IntegerField(null=True)
+    description = models.TextField(null=True)
