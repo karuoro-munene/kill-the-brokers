@@ -39,11 +39,24 @@ def update_profile_signal(sender, instance, created, **kwargs):
 class Category(models.Model):
     name = models.CharField(max_length=100, null=False)
 
+    def __str__(self):
+        return self.name
+
+
+class ProductImages(models.Model):
+    image1 = models.ImageField(upload_to="product_images", null=True)
+    image2 = models.ImageField(upload_to="product_images", null=True)
+    image3 = models.ImageField(upload_to="product_images", null=True)
+    image4 = models.ImageField(upload_to="product_images", null=True)
+
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50,null=False)
-    images = models.ImageField(upload_to="product_images",null=True)
+    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE, related_name="category")
+    name = models.CharField(max_length=50, null=False)
+    images = models.ForeignKey(ProductImages, null=True, on_delete=models.CASCADE, related_name="product_images")
     price = models.FloatField(null=True, default=0.0)
     quantity = models.IntegerField(null=True)
     description = models.TextField(null=True)
+
+    def __str__(self):
+        return self.name

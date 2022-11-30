@@ -10,7 +10,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from kill.models import User, Profile
+from kill.models import User, Profile, Product
 from kill.serializers import CreateUserSerializer, ProfileSerializer
 
 current_format = None
@@ -125,6 +125,33 @@ def profile(request, id):
             profile = Profile.objects.create(user=user, email=user.email)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
+    if request.method == "PUT":
+        return Response()
+    if request.method == "POST":
+        return Response()
+    if request.method == "DELETE":
+        return Response()
+
+
+@api_view(["GET"])
+def all_products(request):
+    products = Product.objects.all()
+    serializer = ProductSerializer(product, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(["GET", "POST", "PUT", "DELETE"])
+def product(request, id):
+    """
+    Gets product detail
+    You can POST, UPDATE and DELETE the product from here
+    :param request:
+    :param id: id of product
+    :return: product details
+    """
+    product = Product.objects.get(id=id)
+    if request.method == "GET":
+        serializer = ProductSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     if request.method == "PUT":
         return Response()
     if request.method == "POST":
