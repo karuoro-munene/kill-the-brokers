@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(ProductImages)
 class ProductImagesAdmin(admin.ModelAdmin):
-    fields = ["images1", "image2", "image3", "image4"]
+    fields = ["image1", "image2", "image3", "image4"]
 
 
 @admin.register(Category)

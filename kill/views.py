@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from kill.models import User, Profile, Product
-from kill.serializers import CreateUserSerializer, ProfileSerializer
+from kill.serializers import CreateUserSerializer, ProfileSerializer, ProductSerializer
 
 current_format = None
 
@@ -43,6 +43,10 @@ class APIRoot(APIView):
                 }
             ],
             "Product Endpoints": [
+                {
+                    "All Products": f"http{ext}://{current_site}/client/products/all",
+                    "Product Details": f"http{ext}://{current_site}/client/products/<id of product>",
+                }
 
             ]
         }
@@ -136,8 +140,9 @@ def profile(request, id):
 @api_view(["GET"])
 def all_products(request):
     products = Product.objects.all()
-    serializer = ProductSerializer(product, many=True)
+    serializer = ProductSerializer(products, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(["GET", "POST", "PUT", "DELETE"])
 def product(request, id):

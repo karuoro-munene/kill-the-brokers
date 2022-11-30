@@ -51,9 +51,9 @@ class ProductImages(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE, related_name="category")
+    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=False)
-    images = models.ForeignKey(ProductImages, null=True, on_delete=models.CASCADE, related_name="product_images")
+    images = models.ForeignKey(ProductImages, null=True, on_delete=models.CASCADE)
     price = models.FloatField(null=True, default=0.0)
     quantity = models.IntegerField(null=True)
     description = models.TextField(null=True)
