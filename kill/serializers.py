@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, password_validation
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
-from kill.models import Profile, Product
+from kill.models import Profile, Product, ProductImages
 
 
 def validate_password(password):
@@ -26,7 +26,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = get_user_model()
-        fields = ("id", "email","password")
+        fields = ("id", "email", "password")
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -50,4 +50,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
+        fields = "__all__"
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImages
         fields = "__all__"

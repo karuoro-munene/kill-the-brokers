@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from kill.models import User, Profile, Product
-from kill.serializers import CreateUserSerializer, ProfileSerializer, ProductSerializer
+from kill.serializers import CreateUserSerializer, ProfileSerializer, ProductSerializer, ImageSerializer
 
 current_format = None
 
@@ -46,6 +46,7 @@ class APIRoot(APIView):
                 {
                     "All Products": f"http{ext}://{current_site}/client/products/all",
                     "Product Details": f"http{ext}://{current_site}/client/products/<id of product>",
+                    "Product Images": f"http{ext}://{current_site}/client/products/<id of product>/images",
                 }
 
             ]
@@ -163,3 +164,19 @@ def product(request, id):
         return Response()
     if request.method == "DELETE":
         return Response()
+
+
+@api_view(["GET"])
+def product_images(request, id):
+    """
+    Gets product images
+    :param request:
+    :param id: id of product
+    :param pk: pk of product images
+    :return: product images
+    """
+    product = Product.objects.get(id=id)
+    images = product.images
+    if request.method == "GET":
+        serializer = ImageSerializer(images)
+        return Response(serializer.data, status=status.HTTP_200_OK)

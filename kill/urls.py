@@ -10,4 +10,5 @@ urlpatterns = [
     path('client/profile/<int:id>', views.profile, name="user-profile"),
     path('client/products/all', views.all_products, name="user-products"),
     path('client/products/<int:id>', views.product, name="user-product-details"),
+    path('client/products/<int:id>/images', views.product_images, name="user-product-images"),
 ]
